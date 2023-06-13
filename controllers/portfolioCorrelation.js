@@ -2,7 +2,6 @@ const portfolioCorrelation = require('../services/portfolioCorrelation')
 const { RESPONSE_MSG, STATUS } = require('../constants/index.js')
 
 const getSchemes = async (request, response) => {
-    console.log("API FOUND & WORKING")
     try {
         const category = request.query.category;
         const pattern = /^[a-zA-Z]+$/

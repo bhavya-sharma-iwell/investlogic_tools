@@ -7,14 +7,13 @@ app.use(cors())
 app.use(express.json())
 app.use(bodyparser.json()) 
 
-app.use('/portfolioCorrelation', require('./routes/portfolioCorrelation'))    
+app.use('/*', require('./routes/portfolioCorrelation'))    
 app.use('/invoiceGenerator', require('./routes/invoiceGenerator'))
-app.use('/portfolioOverlap', require('./routes/portfolioOverlap'))
+app.use('/api/portfolioOverlap', require('./routes/portfolioOverlap'))
 
-app.all('/*', (req, res) => {
-  console.log('no api', req)
-  res.status(404).send('API cannot be  Found')
-})
+// app.all('/*', (req, res) => {
+//   res.status(404).send('API cannot be  Found')
+// })
 
 //running the server
 app.listen(3000, () => { console.log(`Express server listening on port 3000`) })
