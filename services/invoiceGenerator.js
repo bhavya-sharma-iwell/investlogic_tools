@@ -1,5 +1,5 @@
 const axios = require('axios')
-const PYTHON_API = 'http://localhost:8000/pythonDownloadInvoice'
+const PYTHON_API = 'api/pythonDownloadInvoice'
 
 const downloadInvoiceService = async (reqQuery) => {
   try{
