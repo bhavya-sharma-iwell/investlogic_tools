@@ -12,8 +12,9 @@ app.use('/invoiceGenerator', require('./routes/invoiceGenerator'))
 app.use('/portfolioOverlap', require('./routes/portfolioOverlap'))
 
 app.all('/*', (req, res) => {
-  res.status(404).send('API Not Found')
+  console.log('no api', req)
+  res.status(404).send('API cannot be  Found')
 })
 
 //running the server
-app.listen(3000, () => { console.log(`Express server listening on port 3000`) }) 
+app.listen(3000, () => { console.log(`Express server listening on port 3000`) })
