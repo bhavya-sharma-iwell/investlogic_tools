@@ -4,7 +4,7 @@ const { ARRAYLENGTH } = require('../constants/index.js')
 
 
 const getSchemes = async (category) => {
-        const schemes = await scheme.sequelize.query(`select distinct(schemes.schid), name from schemes JOIN navHistory on schemes.schid = navHistory.schid JOIN objectives on schemes.objectiveid = objectives.objectiveid where AUMObjective  = '${category}';`, { type: QueryTypes.SELECT })
+        const schemes = await scheme.sequelize.query(`select distinct(schemes.schid), name from schemes JOIN navHistory on schemes.schid = navHistory.schid JOIN objectives on schemes.objectiveid = objectives.objectiveid JOIN schemeDetails ON schemes.schid=schemeDetails.schid LEFT JOIN shareAndBondTxns sb ON sb.schid=schemes.schid where objectives.AUMObjective  = '${category}' and schemeDetails.mfTally ='Y' and sb.schid is null;`, { type: QueryTypes.SELECT })
         if(schemes.length == ARRAYLENGTH){
             throw "Category doesn't exist"
         }
