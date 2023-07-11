@@ -11,7 +11,7 @@ const getSchemes = async (category) => {
         return schemes
 }
 
-const getNavs = async (schid, date) => {
+const correlationData = async (schid, date) => {
             let navData = await navHistory.sequelize.query(`select nav,navDate,schid from navHistory where navDate >= '${date}' AND schid IN (${schid.join(',')})`)
             navData = navData[0]
             return navData
@@ -29,6 +29,6 @@ const getLaunchDate = async (schid) => {
 
 module.exports = {
     getSchemes,
-    getNavs,
+    correlationData,
     getLaunchDate
 }

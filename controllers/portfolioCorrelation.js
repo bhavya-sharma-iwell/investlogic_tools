@@ -26,7 +26,7 @@ const getSchemes = async (request, response) => {
     }
 }
 
-const getNavs = async (request, response) => {
+const correlationData = async (request, response) => {
     try {
         if (!request.query.schid) {
             throw "Please provide schemes"
@@ -44,10 +44,6 @@ const getNavs = async (request, response) => {
 
         const timePeriod = request.query.timePeriod
         const pattern = /^[0-9]+$/
-
-        if (timePeriod.startsWith("-")) {
-            throw "Negative Time Period not allowed"
-        }
         if (!pattern.test(timePeriod)) {
             throw "Please enter a valid Time Period"
         }
@@ -58,7 +54,7 @@ const getNavs = async (request, response) => {
             throw "Maximum 15 schemes allowed"
         }
 
-        const correlationMatrix = await portfolioCorrelation.getNavs(schid, timePeriod)
+        const correlationMatrix = await portfolioCorrelation.correlationData(schid, timePeriod)
         response.send({
             status: STATUS.SUCCESS,
             message: RESPONSE_MSG.SUCCESS,
@@ -101,6 +97,6 @@ const getLaunchDate = async (request, response) => {
 
 module.exports = {
     getSchemes,
-    getNavs,
+    correlationData,
     getLaunchDate
 }
