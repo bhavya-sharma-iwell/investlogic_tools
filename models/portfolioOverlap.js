@@ -38,7 +38,7 @@ const scheme = sequelize.define('scheme', {
   }
 )
 
-const schemeholding = sequelize.define('schemeHolding',{
+const schemeholding = sequelize.define('schemeHolding', {
     holdingid: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -62,7 +62,7 @@ const schemeholding = sequelize.define('schemeHolding',{
   }
 )
 
-const schemedetail = sequelize.define('schemeDetail',{
+const schemedetail = sequelize.define('schemeDetail', { 
     schid: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -97,4 +97,9 @@ schemeholding.Sequelize = Sequelize
 schemedetail.sequelize = sequelize
 schemedetail.Sequelize = Sequelize
 
-module.exports = { scheme, schemeholding, schemedetail, sequelize }
+module.exports = {
+  scheme,
+  schemeholding,
+  schemedetail,
+  sequelize
+}

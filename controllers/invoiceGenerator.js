@@ -3,7 +3,7 @@ const downloadInvoice = require('../services/invoiceGenerator')
 const { RESPONSE_MSG, STATUS } = require('../constants')
 const path = require('path')
 
-const generatePdf = async (file, options) => {
+const _generatePdf = async (file, options) => {
     try{
         await html_to_pdf.generatePdf(file, options)
         console.log("Pdf generated successfully")
@@ -20,18 +20,18 @@ const downloadInvoiceController = async (request, response) => {
         if(data.length==0){
             throw "Invalid data"
         }
-        let reqQuery = data.replaceAll("hashSymbol", "#")
-        reqQuery = reqQuery.replaceAll("ampersandSymbol", "&")
-        reqQuery = reqQuery.replaceAll("percentageSymbol", "%")
-        reqQuery = reqQuery.replaceAll("plusSymbol", "+")
-        reqQuery = JSON.parse(reqQuery)
-        const htmlCode = await downloadInvoice.downloadInvoiceService(reqQuery)
+        let requestOptions = data.replaceAll("hashSymbol", "#")
+        requestOptions = requestOptions.replaceAll("ampersandSymbol", "&")
+        requestOptions = requestOptions.replaceAll("percentageSymbol", "%")
+        requestOptions = requestOptions.replaceAll("plusSymbol", "+")
+        requestOptions = JSON.parse(requestOptions)
+        const htmlCode = await downloadInvoice.downloadInvoiceService(requestOptions)
         const pdfFilePath = path.join(__dirname, '..', 'invoice.pdf')
         const options = { 
             format: 'A4',
             path: pdfFilePath
         }
-        await generatePdf({content: htmlCode}, options)
+        await _generatePdf({content: htmlCode}, options)
         response.download("invoice.pdf", "tax-invoice.pdf", function (error) {
             if(error){
                 console.log("Error: ", error)

@@ -26,13 +26,13 @@ const getSchemes = async (request, response) => {
     }
 }
 
-const getNavs = async (request, response) => {
+const createCorrelationMatrix = async (request, response) => {
     try {
         if (!request.query.schid) {
-            throw "Please provide schemes"
+            throw 'Please provide schemes'
         }
         if (!request.query.timePeriod) {
-            throw "Please provide Time Period"
+            throw 'Please provide Time Period'
         }
 
         let schid
@@ -44,21 +44,17 @@ const getNavs = async (request, response) => {
 
         const timePeriod = request.query.timePeriod
         const pattern = /^[0-9]+$/
-
-        if (timePeriod.startsWith("-")) {
-            throw "Negative Time Period not allowed"
-        }
         if (!pattern.test(timePeriod)) {
-            throw "Please enter a valid Time Period"
+            throw 'Please enter a valid Time Period'
         }
 
         if (schid.length < 2) {
-            throw "Please provide minimum two schemes"
+            throw 'Please provide minimum two schemes'
         } else if (schid.length > 15) {
-            throw "Maximum 15 schemes allowed"
+            throw 'Maximum 15 schemes allowed'
         }
 
-        const correlationMatrix = await portfolioCorrelation.getNavs(schid, timePeriod)
+        const correlationMatrix = await portfolioCorrelation.createCorrelationMatrix(schid, timePeriod)
         response.send({
             status: STATUS.SUCCESS,
             message: RESPONSE_MSG.SUCCESS,
@@ -78,10 +74,10 @@ const getLaunchDate = async (request, response) => {
         const pattern = /^[0-9]+$/
         const schid = request.query.schid
         if (schid < 0) {
-            throw "Scheme Id should be a positive number"
+            throw 'Scheme Id should be a positive number'
         }
         if (!pattern.test(schid)) {
-            throw "Please enter numbers only !!"
+            throw 'Please enter numbers only !!'
         }
 
         const launchDate = await portfolioCorrelation.getLaunchDate(schid)
@@ -101,6 +97,6 @@ const getLaunchDate = async (request, response) => {
 
 module.exports = {
     getSchemes,
-    getNavs,
+    createCorrelationMatrix,
     getLaunchDate
 }

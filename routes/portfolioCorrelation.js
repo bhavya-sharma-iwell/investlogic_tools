@@ -3,6 +3,6 @@ const router = express.Router()
 const controller = require('../controllers/portfolioCorrelation')
 
 router.get('/getSchemes', controller.getSchemes)
-router.get('/getNavs', controller.getNavs)
+router.get('/createCorrelationMatrix', controller.createCorrelationMatrix)
 router.get('/getLaunchDate', controller.getLaunchDate)
 module.exports = router
