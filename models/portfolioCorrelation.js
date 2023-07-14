@@ -1,15 +1,12 @@
 const Sequelize = require('sequelize')
 const config = require(__dirname + '/../config/db.json').mysql
-let sequelize = null
-sequelize = new Sequelize(config.database, null, null, config)
+const sequelize = new Sequelize(config.database, null, null, config)
 
 sequelize.authenticate().then(() => {
-  console.log("connection established")
+  console.log('connection established')
 }).catch((error) => {
-  console.error("Connection error", error)
+  console.error('Connection error', error)
 })
-
-
 
 const scheme = sequelize.define('schemes', {
   fundid: {
@@ -86,7 +83,7 @@ const navHistory = sequelize.define('navHistory', {
 
 sequelize.sync().then(() => {
 }).catch((error) => {
-  console.error("Unable to sync table", error)
+  console.error('Unable to sync table', error)
 })
 
 scheme.Sequelize = Sequelize

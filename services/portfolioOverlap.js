@@ -10,8 +10,8 @@ const getPortfolioOverlap = async (schid1, schid2) => {
   const {holdingA, holdingB} = schemeHoldings
 
   let percentage = 0
-  let holding = []
-  let unCommonData = []
+  const holding = []
+  const unCommonData = []
   let commonHoldings = 0
   let commonHoldingASum = 0
   let commonHoldingBSum = 0
@@ -51,7 +51,7 @@ const getPortfolioOverlap = async (schid1, schid2) => {
     }
   })
   // concat Common Holdings and Uncommon Holdings
-  holding = holding.concat(unCommonData)
+  holding.push(...unCommonData)
 
   // find sumNetAssetHoldingA
   const sumNetAssetHoldingA = holdingA
