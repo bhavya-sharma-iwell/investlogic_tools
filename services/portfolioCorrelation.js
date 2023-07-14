@@ -91,9 +91,9 @@ const getSchemes = async (category) => {
     return schemes
 }
 
-const correlationData = async (schid, timePeriod) => {
+const createCorrelationMatrix = async (schid, timePeriod) => {
     const date = moment().subtract(timePeriod, 'months').format('YYYY-MM-DD')
-    const navData = await query.correlationData(schid, date)
+    const navData = await query.createCorrelationMatrix(schid, date)
     const correlationMatrix = await calculateMatrix(navData)
     return correlationMatrix
 }
@@ -105,6 +105,6 @@ const getLaunchDate = async (schid) => {
 
 module.exports = {
     getSchemes,
-    correlationData,
+    createCorrelationMatrix,
     getLaunchDate
 }

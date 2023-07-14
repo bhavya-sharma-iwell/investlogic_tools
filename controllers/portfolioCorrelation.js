@@ -26,7 +26,7 @@ const getSchemes = async (request, response) => {
     }
 }
 
-const correlationData = async (request, response) => {
+const createCorrelationMatrix = async (request, response) => {
     try {
         if (!request.query.schid) {
             throw 'Please provide schemes'
@@ -54,7 +54,7 @@ const correlationData = async (request, response) => {
             throw 'Maximum 15 schemes allowed'
         }
 
-        const correlationMatrix = await portfolioCorrelation.correlationData(schid, timePeriod)
+        const correlationMatrix = await portfolioCorrelation.createCorrelationMatrix(schid, timePeriod)
         response.send({
             status: STATUS.SUCCESS,
             message: RESPONSE_MSG.SUCCESS,
@@ -97,6 +97,6 @@ const getLaunchDate = async (request, response) => {
 
 module.exports = {
     getSchemes,
-    correlationData,
+    createCorrelationMatrix,
     getLaunchDate
 }
