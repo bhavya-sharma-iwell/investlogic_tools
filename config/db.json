@@ -1,8 +1,8 @@
 {
   "mysql": {
       "replication": {
-        "read": [{ "host": "127.0.0.1","username": "root", "password": "root" }],
-        "write": { "host": "127.0.0.1","username": "root", "password": "root" }
+        "read": [{ "host": "127.0.0.1","username": "peeyush", "password": "peeyush" }],
+        "write": { "host": "127.0.0.1","username": "peeyush", "password": "peeyush" }
       },
       "database": "iwell2_new",
       "dialect": "mysql",
